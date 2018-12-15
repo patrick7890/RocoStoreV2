@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompraViewDlg" widgetVar="CompraViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewCompraTitle}" closeOnEscape="true">
+
+            <h:form id="CompraViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{compraController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewCompraLabel_idCompra}"/>
+                        <h:outputText value="#{compraController.selected.idCompra}" title="#{myBundle.ViewCompraTitle_idCompra}"/>
+
+                        <h:outputText value="#{myBundle.ViewCompraLabel_fechaCompra}"/>
+                        <h:outputText value="#{compraController.selected.fechaCompra}" title="#{myBundle.ViewCompraTitle_fechaCompra}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewCompraLabel_totalCompra}"/>
+                        <h:outputText value="#{compraController.selected.totalCompra}" title="#{myBundle.ViewCompraTitle_totalCompra}"/>
+
+                        <h:outputText value="#{myBundle.ViewCompraLabel_facturada}"/>
+                        <p:selectBooleanCheckbox id="facturada" value="#{compraController.selected.facturada}" title="#{myBundle.EditCompraTitle_facturada}" required="true" requiredMessage="#{myBundle.EditCompraRequiredMessage_facturada}"/>
+
+                        <h:outputText value="#{myBundle.ViewCompraLabel_codigoList}"/>
+                        <p:selectManyMenu converter="codigoConverter">
+                            <f:attribute name="collectionType" value="java.util.ArrayList"/>
+                            <f:selectItems value="#{compraController.selected.codigoList}"
+                                           var="codigoListItem"
+                                           itemValue="#{codigoListItem}"
+                                           itemLabel="#{codigoListItem.codigo.toString()}"
+                                           />
+
+                        </p:selectManyMenu>
+
+                        <h:outputText value="#{myBundle.ViewCompraLabel_usuarioidUsuario}"/>
+                        <h:outputText value="#{compraController.selected.usuarioidUsuario.idUsuario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('CompraViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

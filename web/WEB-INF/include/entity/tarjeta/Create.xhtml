@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TarjetaCreateDlg" widgetVar="TarjetaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreateTarjetaTitle}" closeOnEscape="true">
+
+            <h:form id="TarjetaCreateForm">
+
+                <h:panelGroup id="display" rendered="#{tarjetaController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{myBundle.CreateTarjetaLabel_tarjetaPK_idTarjeta}" for="tarjetaPK_idTarjeta" />
+                        <p:inputText id="tarjetaPK_idTarjeta" value="#{tarjetaController.selected.tarjetaPK.idTarjeta}" title="#{myBundle.CreateTarjetaTitle_tarjetaPK_idTarjeta}" required="true" requiredMessage="#{myBundle.CreateTarjetaRequiredMessage_tarjetaPK_idTarjeta}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateTarjetaLabel_tarjetaPK_usuarioidUsuario}" for="tarjetaPK_usuarioidUsuario" />
+                        <p:inputText id="tarjetaPK_usuarioidUsuario" value="#{tarjetaController.selected.tarjetaPK.usuarioidUsuario}" title="#{myBundle.CreateTarjetaTitle_tarjetaPK_usuarioidUsuario}" required="true" requiredMessage="#{myBundle.CreateTarjetaRequiredMessage_tarjetaPK_usuarioidUsuario}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateTarjetaLabel_numTarjeta}" for="numTarjeta" />
+                        <p:inputText id="numTarjeta" value="#{tarjetaController.selected.numTarjeta}" title="#{myBundle.CreateTarjetaTitle_numTarjeta}" required="true" requiredMessage="#{myBundle.CreateTarjetaRequiredMessage_numTarjeta}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateTarjetaLabel_fechaExp}" for="fechaExp" />
+                        <p:calendar id="fechaExp" pattern="MM/dd/yyyy" value="#{tarjetaController.selected.fechaExp}" title="#{myBundle.CreateTarjetaTitle_fechaExp}" required="true" requiredMessage="#{myBundle.CreateTarjetaRequiredMessage_fechaExp}" showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreateTarjetaLabel_cvv}" for="cvv" />
+                        <p:inputText id="cvv" value="#{tarjetaController.selected.cvv}" title="#{myBundle.CreateTarjetaTitle_cvv}" required="true" requiredMessage="#{myBundle.CreateTarjetaRequiredMessage_cvv}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateTarjetaLabel_usuario}" for="usuario" />
+                        <p:selectOneMenu id="usuario" value="#{tarjetaController.selected.usuario}" required="true" requiredMessage="#{myBundle.CreateTarjetaRequiredMessage_usuario}" converter="usuarioConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.items}"
+                                           var="usuarioItem"
+                                           itemValue="#{usuarioItem}"
+                                           itemLabel="#{usuarioItem.idUsuario.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tarjetaController.saveNew}" value="#{myBundle.Save}" update="display,:TarjetaListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TarjetaCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('TarjetaCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TarjetaViewDlg" widgetVar="TarjetaViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewTarjetaTitle}" closeOnEscape="true">
+
+            <h:form id="TarjetaViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{tarjetaController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewTarjetaLabel_tarjetaPK_idTarjeta}"/>
+                        <h:outputText value="#{tarjetaController.selected.tarjetaPK.idTarjeta}" title="#{myBundle.ViewTarjetaTitle_tarjetaPK_idTarjeta}"/>
+
+                        <h:outputText value="#{myBundle.ViewTarjetaLabel_tarjetaPK_usuarioidUsuario}"/>
+                        <h:outputText value="#{tarjetaController.selected.tarjetaPK.usuarioidUsuario}" title="#{myBundle.ViewTarjetaTitle_tarjetaPK_usuarioidUsuario}"/>
+
+                        <h:outputText value="#{myBundle.ViewTarjetaLabel_numTarjeta}"/>
+                        <h:outputText value="#{tarjetaController.selected.numTarjeta}" title="#{myBundle.ViewTarjetaTitle_numTarjeta}"/>
+
+                        <h:outputText value="#{myBundle.ViewTarjetaLabel_fechaExp}"/>
+                        <h:outputText value="#{tarjetaController.selected.fechaExp}" title="#{myBundle.ViewTarjetaTitle_fechaExp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewTarjetaLabel_cvv}"/>
+                        <h:outputText value="#{tarjetaController.selected.cvv}" title="#{myBundle.ViewTarjetaTitle_cvv}"/>
+
+                        <h:outputText value="#{myBundle.ViewTarjetaLabel_usuario}"/>
+                        <h:outputText value="#{tarjetaController.selected.usuario.idUsuario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('TarjetaViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

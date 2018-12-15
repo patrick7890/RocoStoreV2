@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="PlataformaEditDlg" widgetVar="PlataformaEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditPlataformaTitle}" closeOnEscape="true">
+
+            <h:form id="PlataformaEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{plataformaController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditPlataformaLabel_idPlataforma}" for="idPlataforma" />
+                        <h:outputText id="idPlataforma" value="#{plataformaController.selected.idPlataforma}" />
+
+                        <p:outputLabel value="#{myBundle.EditPlataformaLabel_plataforma}" for="plataforma" />
+                        <p:inputText id="plataforma" value="#{plataformaController.selected.plataforma}" title="#{myBundle.EditPlataformaTitle_plataforma}" required="true" requiredMessage="#{myBundle.EditPlataformaRequiredMessage_plataforma}" size="45" maxlength="45"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{plataformaController.save}" value="#{myBundle.Save}" update="display,:PlataformaListForm:datalist,:PlataformaListForm:PlataformaDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PlataformaEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('PlataformaEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

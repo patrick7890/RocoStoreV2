@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CodigoViewDlg" widgetVar="CodigoViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewCodigoTitle}" closeOnEscape="true">
+
+            <h:form id="CodigoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{codigoController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewCodigoLabel_codigo}"/>
+                        <h:outputText value="#{codigoController.selected.codigo}" title="#{myBundle.ViewCodigoTitle_codigo}"/>
+
+                        <h:outputText value="#{myBundle.ViewCodigoLabel_activo}"/>
+                        <h:outputText value="#{codigoController.selected.activo}" title="#{myBundle.ViewCodigoTitle_activo}"/>
+
+                        <h:outputText value="#{myBundle.ViewCodigoLabel_juegoidJuego}"/>
+                        <h:outputText value="#{codigoController.selected.juegoidJuego}">
+                            <f:converter converterId="juegoConverter"/>
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('CodigoViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="CodigoListForm">
+
+        <p:panel header="#{myBundle.ListCodigoTitle}">
+            <p:contextMenu id="CodigoDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{myBundle.Create}" onclick="document.getElementById('CodigoListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('CodigoListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('CodigoListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('CodigoListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{myBundle.CodigoMenuItem_compraList}" icon="ui-icon-search"  action="#{codigoController.navigateCompraList}" disabled="#{codigoController.isCompraListEmpty}" ajax="false"/>  
+                <p:menuitem value="#{myBundle.CodigoMenuItem_juegoidJuego}" icon="ui-icon-search"  actionListener="#{codigoController.prepareJuegoidJuego}" update=":JuegoViewForm" oncomplete="PF('JuegoViewDialog').show()" disabled="#{empty codigoController.selected.juegoidJuego}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{codigoController.items}"
+                         lazy="false"
+                         rowKey="#{item.codigo}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{codigoController.selected}"
+                         filteredValue="#{codigoController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{codigoController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.codigo}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CodigoDataTableContextMenu" listener="#{codigoController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CodigoDataTableContextMenu" listener="#{codigoController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{codigoController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('CodigoListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.codigo}" filterBy="#{item.codigo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListCodigoTitle_codigo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codigo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.activo}" filterBy="#{item.activo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListCodigoTitle_activo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.activo}"/>
+                </p:column>
+
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListCodigoTitle_juegoidJuego}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.juegoidJuego}">
+                        <f:converter converterId="juegoConverter"/>
+                    </h:outputText>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{codigoController.prepareCreate}" update=":CodigoCreateForm" oncomplete="PF('CodigoCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{myBundle.View}" update=":CodigoViewForm" oncomplete="PF('CodigoViewDialog').show()" disabled="#{empty codigoController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":CodigoEditForm" oncomplete="PF('CodigoEditDialog').show()" disabled="#{empty codigoController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{codigoController.delete}" update=":growl,datalist" disabled="#{empty codigoController.selected}">
+                <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

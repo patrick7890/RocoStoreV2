@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="CompraEditDlg" widgetVar="CompraEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditCompraTitle}" closeOnEscape="true">
+
+            <h:form id="CompraEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{compraController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditCompraLabel_idCompra}" for="idCompra" />
+                        <h:outputText id="idCompra" value="#{compraController.selected.idCompra}" />
+
+                        <p:outputLabel value="#{myBundle.EditCompraLabel_fechaCompra}" for="fechaCompra" />
+                        <p:calendar id="fechaCompra" pattern="MM/dd/yyyy" value="#{compraController.selected.fechaCompra}" title="#{myBundle.EditCompraTitle_fechaCompra}" required="true" requiredMessage="#{myBundle.EditCompraRequiredMessage_fechaCompra}" showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditCompraLabel_totalCompra}" for="totalCompra" />
+                        <p:inputText id="totalCompra" value="#{compraController.selected.totalCompra}" title="#{myBundle.EditCompraTitle_totalCompra}" required="true" requiredMessage="#{myBundle.EditCompraRequiredMessage_totalCompra}"/>
+
+                        <p:outputLabel value="#{myBundle.EditCompraLabel_facturada}" for="facturada" />
+                        <p:selectBooleanCheckbox id="facturada" value="#{compraController.selected.facturada}" required="true" requiredMessage="#{myBundle.EditCompraRequiredMessage_facturada}"/>
+
+                        <p:outputLabel value="#{myBundle.EditCompraLabel_codigoList}" for="codigoList" />
+                        <p:selectManyMenu id="codigoList" value="#{compraController.selected.codigoList}"  converter="codigoConverter">
+                            <f:attribute name="collectionType" value="java.util.ArrayList"/>
+                            <f:selectItems value="#{codigoController.items}"
+                                           var="codigoListItem"
+                                           itemValue="#{codigoListItem}"
+                                           itemLabel="#{codigoListItem.codigo.toString()}"
+                                           />
+
+                        </p:selectManyMenu>
+
+                        <p:outputLabel value="#{myBundle.EditCompraLabel_usuarioidUsuario}" for="usuarioidUsuario" />
+                        <p:selectOneMenu id="usuarioidUsuario" value="#{compraController.selected.usuarioidUsuario}" required="true" requiredMessage="#{myBundle.EditCompraRequiredMessage_usuarioidUsuario}" converter="usuarioConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.items}"
+                                           var="usuarioidUsuarioItem"
+                                           itemValue="#{usuarioidUsuarioItem}"
+                                           itemLabel="#{usuarioidUsuarioItem.idUsuario.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{compraController.save}" value="#{myBundle.Save}" update="display,:CompraListForm:datalist,:CompraListForm:CompraDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CompraEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('CompraEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

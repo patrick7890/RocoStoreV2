@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompraCreateDlg" widgetVar="CompraCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreateCompraTitle}" closeOnEscape="true">
+
+            <h:form id="CompraCreateForm">
+
+                <h:panelGroup id="display" rendered="#{compraController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{myBundle.CreateCompraLabel_fechaCompra}" for="fechaCompra" />
+                        <p:calendar id="fechaCompra" pattern="MM/dd/yyyy" value="#{compraController.selected.fechaCompra}" title="#{myBundle.CreateCompraTitle_fechaCompra}" required="true" requiredMessage="#{myBundle.CreateCompraRequiredMessage_fechaCompra}" showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreateCompraLabel_totalCompra}" for="totalCompra" />
+                        <p:inputText id="totalCompra" value="#{compraController.selected.totalCompra}" title="#{myBundle.CreateCompraTitle_totalCompra}" required="true" requiredMessage="#{myBundle.CreateCompraRequiredMessage_totalCompra}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateCompraLabel_facturada}" for="facturada" />
+                        <p:selectBooleanCheckbox id="facturada" value="#{compraController.selected.facturada}" required="true" requiredMessage="#{myBundle.CreateCompraRequiredMessage_facturada}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateCompraLabel_codigoList}" for="codigoList" />
+                        <p:selectManyMenu id="codigoList" value="#{compraController.selected.codigoList}"  converter="codigoConverter">
+                            <f:attribute name="collectionType" value="java.util.ArrayList"/>
+                            <f:selectItems value="#{codigoController.items}"
+                                           var="codigoListItem"
+                                           itemValue="#{codigoListItem}"
+                                           itemLabel="#{codigoListItem.codigo.toString()}"
+                                           />
+
+                        </p:selectManyMenu>
+
+                        <p:outputLabel value="#{myBundle.CreateCompraLabel_usuarioidUsuario}" for="usuarioidUsuario" />
+                        <p:selectOneMenu id="usuarioidUsuario" value="#{compraController.selected.usuarioidUsuario}" required="true" requiredMessage="#{myBundle.CreateCompraRequiredMessage_usuarioidUsuario}" converter="usuarioConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.items}"
+                                           var="usuarioidUsuarioItem"
+                                           itemValue="#{usuarioidUsuarioItem}"
+                                           itemLabel="#{usuarioidUsuarioItem.idUsuario.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{compraController.saveNew}" value="#{myBundle.Save}" update="display,:CompraListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CompraCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('CompraCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

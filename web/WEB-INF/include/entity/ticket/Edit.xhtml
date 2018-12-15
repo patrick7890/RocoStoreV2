@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="TicketEditDlg" widgetVar="TicketEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditTicketTitle}" closeOnEscape="true">
+
+            <h:form id="TicketEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{ticketController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditTicketLabel_idTicket}" for="idTicket" />
+                        <h:outputText id="idTicket" value="#{ticketController.selected.idTicket}" />
+
+                        <p:outputLabel value="#{myBundle.EditTicketLabel_descripcionTicket}" for="descripcionTicket" />
+                        <p:inputText id="descripcionTicket" value="#{ticketController.selected.descripcionTicket}" title="#{myBundle.EditTicketTitle_descripcionTicket}" required="true" requiredMessage="#{myBundle.EditTicketRequiredMessage_descripcionTicket}" size="255" maxlength="255"/>
+
+                        <p:outputLabel value="#{myBundle.EditTicketLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{ticketController.selected.estado}" title="#{myBundle.EditTicketTitle_estado}" required="true" requiredMessage="#{myBundle.EditTicketRequiredMessage_estado}"/>
+
+                        <p:outputLabel value="#{myBundle.EditTicketLabel_respuestaTicket}" for="respuestaTicket" />
+                        <p:inputText id="respuestaTicket" value="#{ticketController.selected.respuestaTicket}" title="#{myBundle.EditTicketTitle_respuestaTicket}" size="255" maxlength="255"/>
+
+                        <p:outputLabel value="#{myBundle.EditTicketLabel_nombreAdmin}" for="nombreAdmin" />
+                        <p:inputText id="nombreAdmin" value="#{ticketController.selected.nombreAdmin}" title="#{myBundle.EditTicketTitle_nombreAdmin}" size="45" maxlength="45"/>
+
+                        <p:outputLabel value="#{myBundle.EditTicketLabel_imagenTicket}" for="imagenTicket" />
+                        <p:inputText id="imagenTicket" value="#{ticketController.selected.imagenTicket}" title="#{myBundle.EditTicketTitle_imagenTicket}" size="45" maxlength="45"/>
+
+                        <p:outputLabel value="#{myBundle.EditTicketLabel_tipoTicketidTipoTicket}" for="tipoTicketidTipoTicket" />
+                        <p:selectOneMenu id="tipoTicketidTipoTicket" value="#{ticketController.selected.tipoTicketidTipoTicket}" required="true" requiredMessage="#{myBundle.EditTicketRequiredMessage_tipoTicketidTipoTicket}" converter="tipoticketConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoticketController.items}"
+                                           var="tipoTicketidTipoTicketItem"
+                                           itemValue="#{tipoTicketidTipoTicketItem}"
+                                           itemLabel="#{tipoTicketidTipoTicketItem.descripcionTicket.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{myBundle.EditTicketLabel_usuarioidUsuario}" for="usuarioidUsuario" />
+                        <p:selectOneMenu id="usuarioidUsuario" value="#{ticketController.selected.usuarioidUsuario}" required="true" requiredMessage="#{myBundle.EditTicketRequiredMessage_usuarioidUsuario}" converter="usuarioConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.items}"
+                                           var="usuarioidUsuarioItem"
+                                           itemValue="#{usuarioidUsuarioItem}"
+                                           itemLabel="#{usuarioidUsuarioItem.idUsuario.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ticketController.save}" value="#{myBundle.Save}" update="display,:TicketListForm:datalist,:TicketListForm:TicketDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TicketEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('TicketEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

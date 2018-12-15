@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="TarjetaEditDlg" widgetVar="TarjetaEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditTarjetaTitle}" closeOnEscape="true">
+
+            <h:form id="TarjetaEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{tarjetaController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditTarjetaLabel_tarjetaPK_idTarjeta}" for="tarjetaPK_idTarjeta" />
+                        <h:outputText id="tarjetaPK_idTarjeta" value="#{tarjetaController.selected.tarjetaPK.idTarjeta}" />
+
+
+                        <h:outputLabel value="#{myBundle.EditTarjetaLabel_tarjetaPK_usuarioidUsuario}" for="tarjetaPK_usuarioidUsuario" />
+                        <h:outputText id="tarjetaPK_usuarioidUsuario" value="#{tarjetaController.selected.tarjetaPK.usuarioidUsuario}" />
+
+                        <p:outputLabel value="#{myBundle.EditTarjetaLabel_numTarjeta}" for="numTarjeta" />
+                        <p:inputText id="numTarjeta" value="#{tarjetaController.selected.numTarjeta}" title="#{myBundle.EditTarjetaTitle_numTarjeta}" required="true" requiredMessage="#{myBundle.EditTarjetaRequiredMessage_numTarjeta}"/>
+
+                        <p:outputLabel value="#{myBundle.EditTarjetaLabel_fechaExp}" for="fechaExp" />
+                        <p:calendar id="fechaExp" pattern="MM/dd/yyyy" value="#{tarjetaController.selected.fechaExp}" title="#{myBundle.EditTarjetaTitle_fechaExp}" required="true" requiredMessage="#{myBundle.EditTarjetaRequiredMessage_fechaExp}" showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditTarjetaLabel_cvv}" for="cvv" />
+                        <p:inputText id="cvv" value="#{tarjetaController.selected.cvv}" title="#{myBundle.EditTarjetaTitle_cvv}" required="true" requiredMessage="#{myBundle.EditTarjetaRequiredMessage_cvv}"/>
+
+
+                        <h:outputLabel value="#{myBundle.EditTarjetaLabel_usuario}" for="usuario" />
+                        <h:outputText id="usuario" value="#{tarjetaController.selected.usuario}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tarjetaController.save}" value="#{myBundle.Save}" update="display,:TarjetaListForm:datalist,:TarjetaListForm:TarjetaDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TarjetaEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('TarjetaEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

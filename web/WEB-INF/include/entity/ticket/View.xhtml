@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TicketViewDlg" widgetVar="TicketViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewTicketTitle}" closeOnEscape="true">
+
+            <h:form id="TicketViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{ticketController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewTicketLabel_idTicket}"/>
+                        <h:outputText value="#{ticketController.selected.idTicket}" title="#{myBundle.ViewTicketTitle_idTicket}"/>
+
+                        <h:outputText value="#{myBundle.ViewTicketLabel_descripcionTicket}"/>
+                        <h:outputText value="#{ticketController.selected.descripcionTicket}" title="#{myBundle.ViewTicketTitle_descripcionTicket}"/>
+
+                        <h:outputText value="#{myBundle.ViewTicketLabel_estado}"/>
+                        <h:outputText value="#{ticketController.selected.estado}" title="#{myBundle.ViewTicketTitle_estado}"/>
+
+                        <h:outputText value="#{myBundle.ViewTicketLabel_respuestaTicket}"/>
+                        <h:outputText value="#{ticketController.selected.respuestaTicket}" title="#{myBundle.ViewTicketTitle_respuestaTicket}"/>
+
+                        <h:outputText value="#{myBundle.ViewTicketLabel_nombreAdmin}"/>
+                        <h:outputText value="#{ticketController.selected.nombreAdmin}" title="#{myBundle.ViewTicketTitle_nombreAdmin}"/>
+
+                        <h:outputText value="#{myBundle.ViewTicketLabel_imagenTicket}"/>
+                        <h:outputText value="#{ticketController.selected.imagenTicket}" title="#{myBundle.ViewTicketTitle_imagenTicket}"/>
+
+                        <h:outputText value="#{myBundle.ViewTicketLabel_tipoTicketidTipoTicket}"/>
+                        <h:outputText value="#{ticketController.selected.tipoTicketidTipoTicket.descripcionTicket}"/>
+
+                        <h:outputText value="#{myBundle.ViewTicketLabel_usuarioidUsuario}"/>
+                        <h:outputText value="#{ticketController.selected.usuarioidUsuario.idUsuario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('TicketViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

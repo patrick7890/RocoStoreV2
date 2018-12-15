@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="CodigoEditDlg" widgetVar="CodigoEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditCodigoTitle}" closeOnEscape="true">
+
+            <h:form id="CodigoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{codigoController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditCodigoLabel_codigo}" for="codigo" />
+                        <h:outputText id="codigo" value="#{codigoController.selected.codigo}" />
+
+                        <p:outputLabel value="#{myBundle.EditCodigoLabel_activo}" for="activo" />
+                        <p:inputText id="activo" value="#{codigoController.selected.activo}" title="#{myBundle.EditCodigoTitle_activo}" required="true" requiredMessage="#{myBundle.EditCodigoRequiredMessage_activo}"/>
+
+                        <p:outputLabel value="#{myBundle.EditCodigoLabel_juegoidJuego}" for="juegoidJuego" />
+                        <p:selectOneMenu id="juegoidJuego" value="#{codigoController.selected.juegoidJuego}" required="true" requiredMessage="#{myBundle.EditCodigoRequiredMessage_juegoidJuego}" converter="juegoConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{juegoController.items}"
+                                           var="juegoidJuegoItem"
+                                           itemValue="#{juegoidJuegoItem}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{codigoController.save}" value="#{myBundle.Save}" update="display,:CodigoListForm:datalist,:CodigoListForm:CodigoDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CodigoEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('CodigoEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
