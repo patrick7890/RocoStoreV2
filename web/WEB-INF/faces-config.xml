@@ -10,4 +10,9 @@
         </resource-bundle>
         <navigation-handler>org.primefaces.mobile.application.MobileNavigationHandler</navigation-handler>
     </application>
+    <managed-bean>
+        <managed-bean-name>LoginController</managed-bean-name>
+        <managed-bean-class>controller.LoginController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

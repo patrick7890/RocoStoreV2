@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
     , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
     , @NamedQuery(name = "Usuario.findByNombreUsuario", query = "SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario")
+    ,@NamedQuery(name = "Usuario.login", query = "SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario and u.passUsuario = :passUsuario")
     , @NamedQuery(name = "Usuario.findByPassUsuario", query = "SELECT u FROM Usuario u WHERE u.passUsuario = :passUsuario")})
 public class Usuario implements Serializable {
 
@@ -161,5 +162,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "entity.Usuario[ idUsuario=" + idUsuario + " ]";
     }
-    
+
 }

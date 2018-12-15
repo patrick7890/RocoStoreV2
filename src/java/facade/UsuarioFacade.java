@@ -18,6 +18,7 @@ import entity.Ticket;
 import entity.Tipousuario;
 import entity.Tarjeta;
 import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
@@ -94,5 +95,16 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         tarjetaList.size();
         return tarjetaList;
     }
-    
+
+    public Usuario validate(String user, String pwd) {
+        try {
+            Query q = em.createNamedQuery("Usuario.login");
+            q.setParameter("nombreUsuario", user);
+            q.setParameter("passUsuario", pwd);
+            return (Usuario) q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }
