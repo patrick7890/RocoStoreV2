@@ -9,9 +9,9 @@ import entity.Usuario;
 import facade.UsuarioFacade;
 import java.io.IOException;
 import javax.ejb.EJB;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -20,8 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Patricio
  */
-@Named(value = "LoginController")
-@Dependent
+@ManagedBean(name="loginController")
+@SessionScoped
 public class LoginController {
 
     @EJB
@@ -54,11 +54,11 @@ public class LoginController {
         if (aux != null) {
             HttpSession ses = (HttpSession) context.getExternalContext().getSession(false);
             ses.setAttribute("user", aux);
-            context.getExternalContext().redirect("/rocostore/faces/index.xhtml");
+            context.getExternalContext().redirect("/RocoStoreV2/faces/index.xhtml");
         } else {
 
             context.addMessage(null, new FacesMessage("Login Error", "Usuario o contraseña incorrecto"));
-            context.getExternalContext().redirect("/rocostore/faces/login.xhtml");
+            context.getExternalContext().redirect("/RocoStoreV2/faces/login.xhtml");
         }
 
     }
@@ -66,6 +66,7 @@ public class LoginController {
     public void logout() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-        context.redirect("/rocostore/faces/login.xhtml");
+        context.redirect("/RocoStoreV2/faces/login.xhtml");
     }
+    
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="JuegoViewDlg" widgetVar="JuegoViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewJuegoTitle}" closeOnEscape="true">
+
+            <h:form id="JuegoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{juegoController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewJuegoLabel_idJuego}"/>
+                        <h:outputText value="#{juegoController.selected.idJuego}" title="#{myBundle.ViewJuegoTitle_idJuego}"/>
+
+                        <h:outputText value="#{myBundle.ViewJuegoLabel_nombreJuego}"/>
+                        <h:outputText value="#{juegoController.selected.nombreJuego}" title="#{myBundle.ViewJuegoTitle_nombreJuego}"/>
+
+                        <h:outputText value="#{myBundle.ViewJuegoLabel_descripcionJuego}"/>
+                        <h:outputText value="#{juegoController.selected.descripcionJuego}" title="#{myBundle.ViewJuegoTitle_descripcionJuego}"/>
+
+                        <h:outputText value="#{myBundle.ViewJuegoLabel_precioJuego}"/>
+                        <h:outputText value="#{juegoController.selected.precioJuego}" title="#{myBundle.ViewJuegoTitle_precioJuego}"/>
+
+                        <h:outputText value="#{myBundle.ViewJuegoLabel_generoList}"/>
+                        <ui:repeat var="gen" value="#{juegoController.selected.generoList}">
+                            <h:outputLabel value="#{gen.genero}"/>
+                            <br/>
+                        </ui:repeat>
+
+                        <h:outputText value="#{myBundle.ViewJuegoLabel_plataformaList}"/>
+                        <ui:repeat var="pla" value="#{juegoController.selected.plataformaList}">
+                            <h:outputLabel value="#{pla.plataforma}"/>
+                            <br/>
+                        </ui:repeat>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('JuegoViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

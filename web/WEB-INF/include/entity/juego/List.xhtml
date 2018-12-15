@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:form id="JuegoListForm">
+
+
+        <p:panel header="#{myBundle.ListJuegoTitle}">
+            <p:contextMenu id="JuegoDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{myBundle.Create}" onclick="document.getElementById('JuegoListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('JuegoListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('JuegoListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('JuegoListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{myBundle.JuegoMenuItem_generoList}" icon="ui-icon-search"  action="#{juegoController.navigateGeneroList}" disabled="#{juegoController.isGeneroListEmpty}" ajax="false"/>  
+                <p:menuitem value="#{myBundle.JuegoMenuItem_plataformaList}" icon="ui-icon-search"  action="#{juegoController.navigatePlataformaList}" disabled="#{juegoController.isPlataformaListEmpty}" ajax="false"/>  
+                <p:menuitem value="#{myBundle.JuegoMenuItem_codigoList}" icon="ui-icon-search"  action="#{juegoController.navigateCodigoList}" disabled="#{juegoController.isCodigoListEmpty}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{juegoController.items}"
+                         lazy="false"
+                         rowKey="#{item.idJuego}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{juegoController.selected}"
+                         filteredValue="#{juegoController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{juegoController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.idJuego}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:JuegoDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:JuegoDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('JuegoListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.idJuego}" filterBy="#{item.idJuego}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListJuegoTitle_idJuego}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idJuego}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.nombreJuego}" filterBy="#{item.nombreJuego}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListJuegoTitle_nombreJuego}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombreJuego}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.descripcionJuego}" filterBy="#{item.descripcionJuego}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListJuegoTitle_descripcionJuego}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descripcionJuego}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.precioJuego}" filterBy="#{item.precioJuego}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListJuegoTitle_precioJuego}"/>
+                    </f:facet>
+                    <h:outputLabel value="#{item.precioJuego==0? 'Gratis' : item.precioJuego}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.plataformaList}" filterBy="#{item.plataformaList}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ViewJuegoLabel_plataformaList}"/>
+                    </f:facet>
+                    <ui:repeat var="plat" value="#{item.plataformaList}">
+                        <h:outputLabel value="#{plat.plataforma}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{juegoController.prepareCreate}" update=":JuegoCreateForm" oncomplete="PF('JuegoCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{myBundle.View}" update=":JuegoViewForm" oncomplete="PF('JuegoViewDialog').show()" disabled="#{empty juegoController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":JuegoEditForm" oncomplete="PF('JuegoEditDialog').show()" disabled="#{empty juegoController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{juegoController.delete}" update=":growl,datalist" disabled="#{empty juegoController.selected}">
+                <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+</ui:composition>

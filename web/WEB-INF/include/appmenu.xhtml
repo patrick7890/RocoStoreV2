@@ -4,23 +4,33 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition>
         <h:form id="menuForm">
             <p:menubar>
                 <p:menuitem value="#{myBundle.Home}" outcome="/index" icon="ui-icon-home"/>
                 <p:submenu label="#{myBundle.Maintenance}">
-                    <p:menuitem value="#{myBundle.CodigoHeading}..." outcome="/app/codigo/index" />
-                    <p:menuitem value="#{myBundle.CompraHeading}..." outcome="/app/compra/index" />
-                    <p:menuitem value="#{myBundle.GeneroHeading}..." outcome="/app/genero/index" />
-                    <p:menuitem value="#{myBundle.PlataformaHeading}..." outcome="/app/plataforma/index" />
-                    <p:menuitem value="#{myBundle.TarjetaHeading}..." outcome="/app/tarjeta/index" />
-                    <p:menuitem value="#{myBundle.TicketHeading}..." outcome="/app/ticket/index" />
-                    <p:menuitem value="#{myBundle.TipoticketHeading}..." outcome="/app/tipoticket/index" />
-                    <p:menuitem value="#{myBundle.TipousuarioHeading}..." outcome="/app/tipousuario/index" />
-                    <p:menuitem value="#{myBundle.UsuarioHeading}..." outcome="/app/usuario/index" />
+                    <p:menuitem value="#{myBundle.CodigoHeading}" outcome="/app/codigo/index" />
+                    <p:menuitem value="#{myBundle.CompraHeading}" outcome="/app/compra/index" />
+                    <p:menuitem value="#{myBundle.GeneroHeading}" outcome="/app/genero/index" />
+                    <p:menuitem value="#{myBundle.JuegoHeading}" outcome="/app/juego/index" />
+                    <p:menuitem value="#{myBundle.PlataformaHeading}" outcome="/app/plataforma/index" />
+                    <p:menuitem value="#{myBundle.TarjetaHeading}" outcome="/app/tarjeta/index" />
+                    <p:menuitem value="#{myBundle.TicketHeading}" outcome="/app/ticket/index" />
+                    <p:menuitem value="#{myBundle.TipoticketHeading}" outcome="/app/tipoticket/index" />
+                    <p:menuitem value="#{myBundle.TipousuarioHeading}" outcome="/app/tipousuario/index" />
+                    <p:menuitem value="#{myBundle.UsuarioHeading}" outcome="/app/usuario/index" />
                 </p:submenu>
+                <c:if test="#{user!=null}">
+                    <p:submenu label="#{user.getNombreUsuario()}">
+                        <p:menuitem value="Cerrar Sesion" actionListener="#{loginController.logout()}"/>
+                    </p:submenu>
+                </c:if>
+                <c:if test="#{user==null}">
+                    <p:menuitem value="#{myBundle.Login}" outcome="/login"/>
+                </c:if>
             </p:menubar>
         </h:form>
     </ui:composition>

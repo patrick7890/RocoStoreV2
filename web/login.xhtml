@@ -5,6 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+    
     <ui:composition template="/WEB-INF/include/template.xhtml">
 
         <ui:define name="body">
@@ -17,12 +18,12 @@
                                 <h5 class="card-title">LoginController</h5>
                                 <div class="form-group">
                                     <h:outputLabel value="#{myBundle.Usuario}" for="username"/>
-                                    <h:inputText class="form-control" id="username" value="#{LoginController.user}"></h:inputText>
+                                    <h:inputText class="form-control" id="username" value="#{loginController.user}"></h:inputText>
 
                                     <h:outputLabel value="#{myBundle.Password}" for="password"/>
-                                    <h:inputSecret class="form-control" id="password" value="#{LoginController.pwd}"></h:inputSecret>
+                                    <h:inputSecret class="form-control" id="password" value="#{loginController.pwd}"></h:inputSecret>
                                 </div>
-                                <h:commandButton class="btn btn-block btn-success " actionListener="#{LoginController.login}" value="Login"></h:commandButton>
+                                <h:commandButton class="btn btn-block btn-success " actionListener="#{loginController.login}" value="Login"></h:commandButton>
                             </div>
                         </div>
                     </h:form>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="JuegoEditDlg" widgetVar="JuegoEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditJuegoTitle}" closeOnEscape="true">
+
+            <h:form id="JuegoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{juegoController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditJuegoLabel_idJuego}" for="idJuego" />
+                        <h:outputText id="idJuego" value="#{juegoController.selected.idJuego}" />
+
+                        <p:outputLabel value="#{myBundle.EditJuegoLabel_nombreJuego}" for="nombreJuego" />
+                        <p:inputText id="nombreJuego" value="#{juegoController.selected.nombreJuego}" title="#{myBundle.EditJuegoTitle_nombreJuego}" required="true" requiredMessage="#{myBundle.EditJuegoRequiredMessage_nombreJuego}" size="45" maxlength="45"/>
+
+                        <p:outputLabel value="#{myBundle.EditJuegoLabel_descripcionJuego}" for="descripcionJuego" />
+                        <p:inputTextarea id="descripcionJuego" value="#{juegoController.selected.descripcionJuego}" title="#{myBundle.EditJuegoTitle_descripcionJuego}" required="true" requiredMessage="#{myBundle.EditJuegoRequiredMessage_descripcionJuego}"  maxlength="255"/>
+
+                        <p:outputLabel value="#{myBundle.EditJuegoLabel_precioJuego}" for="precioJuego" />
+                        <p:inputText id="precioJuego" value="#{juegoController.selected.precioJuego}" title="#{myBundle.EditJuegoTitle_precioJuego}" required="true" requiredMessage="#{myBundle.EditJuegoRequiredMessage_precioJuego}"/>
+
+                        <p:outputLabel value="#{myBundle.EditJuegoLabel_generoList}" for="generoList" />
+                        <p:selectManyCheckbox id="generoList" value="#{juegoController.selected.generoList}"  converter="generoConverter">
+                            <f:attribute name="collectionType" value="java.util.ArrayList"/>
+                            <f:selectItems value="#{generoController.items}"
+                                           var="generoListItem"
+                                           itemValue="#{generoListItem}"
+                                           itemLabel="#{generoListItem.genero}"
+                                           />
+
+                        </p:selectManyCheckbox>
+
+                        <p:outputLabel value="#{myBundle.EditJuegoLabel_plataformaList}" for="plataformaList" />
+                        <p:selectManyCheckbox id="plataformaList" value="#{juegoController.selected.plataformaList}"  converter="plataformaConverter">
+                            <f:attribute name="collectionType" value="java.util.ArrayList"/>
+                            <f:selectItems value="#{plataformaController.items}"
+                                           var="plataformaListItem"
+                                           itemValue="#{plataformaListItem}"
+                                           itemLabel="#{plataformaListItem.plataforma}"
+                                           />
+
+                        </p:selectManyCheckbox>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{juegoController.save}" value="#{myBundle.Save}" update="display,:JuegoListForm:datalist,:JuegoListForm:JuegoDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('JuegoEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('JuegoEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
