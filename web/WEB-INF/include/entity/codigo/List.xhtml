@@ -60,13 +60,11 @@
                 </p:column>
 
 
-                <p:column>
+                <p:column sortBy="#{item.juegoidJuego.descripcionJuego}" filterBy="#{item.juegoidJuego.descripcionJuego}">
                     <f:facet name="header">
                         <h:outputText value="#{myBundle.ListCodigoTitle_juegoidJuego}"/>
                     </f:facet>
-                    <h:outputText value="#{item.juegoidJuego}">
-                        <f:converter converterId="juegoConverter"/>
-                    </h:outputText>
+                    <h:outputText value="#{item.juegoidJuego.descripcionJuego}"/>
                 </p:column>
 
 

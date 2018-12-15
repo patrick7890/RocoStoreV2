@@ -22,9 +22,7 @@
                         <h:outputText value="#{codigoController.selected.activo}" title="#{myBundle.ViewCodigoTitle_activo}"/>
 
                         <h:outputText value="#{myBundle.ViewCodigoLabel_juegoidJuego}"/>
-                        <h:outputText value="#{codigoController.selected.juegoidJuego}">
-                            <f:converter converterId="juegoConverter"/>
-                        </h:outputText>
+                        <h:outputText value="#{codigoController.selected.juegoidJuego.descripcionJuego}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{myBundle.Close}" onclick="PF('CodigoViewDialog').hide()"/>
                 </h:panelGroup>

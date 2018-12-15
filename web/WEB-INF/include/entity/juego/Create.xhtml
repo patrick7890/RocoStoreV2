@@ -16,35 +16,38 @@
                     <p:panelGrid columns="2" columnClasses="column">
 
                         <p:outputLabel value="#{myBundle.CreateJuegoLabel_nombreJuego}" for="nombreJuego" />
-                        <p:inputText id="" value="#{juegoController.selected.nombreJuego}" title="#{myBundle.CreateJuegoTitle_nombreJuego}" required="true" requiredMessage="#{myBundle.CreateJnombreJuegouegoRequiredMessage_nombreJuego}" size="45" maxlength="45"/>
+                        <p:inputText id="nombreJuego" value="#{juegoController.selected.nombreJuego}" title="#{myBundle.CreateJuegoTitle_nombreJuego}" required="true" requiredMessage="#{myBundle.CreateJuegoRequiredMessage_nombreJuego}" size="45" maxlength="45"/>
 
                         <p:outputLabel value="#{myBundle.CreateJuegoLabel_descripcionJuego}" for="descripcionJuego" />
-                        <p:inputTextarea id="descripcionJuego" value="#{juegoController.selected.descripcionJuego}" title="#{myBundle.CreateJuegoTitle_descripcionJuego}" required="true" requiredMessage="#{myBundle.CreateJuegoRequiredMessage_descripcionJuego}" maxlength="255"/>
+                        <p:inputText id="descripcionJuego" value="#{juegoController.selected.descripcionJuego}" title="#{myBundle.CreateJuegoTitle_descripcionJuego}" required="true" requiredMessage="#{myBundle.CreateJuegoRequiredMessage_descripcionJuego}" size="255" maxlength="255"/>
 
                         <p:outputLabel value="#{myBundle.CreateJuegoLabel_precioJuego}" for="precioJuego" />
                         <p:inputText id="precioJuego" value="#{juegoController.selected.precioJuego}" title="#{myBundle.CreateJuegoTitle_precioJuego}" required="true" requiredMessage="#{myBundle.CreateJuegoRequiredMessage_precioJuego}"/>
 
+                        <p:outputLabel value="#{myBundle.CreateJuegoLabel_imgurl}" for="imgurl" />
+                        <p:inputText id="imgurl" value="#{juegoController.selected.imgurl}" title="#{myBundle.CreateJuegoTitle_imgurl}" required="true" requiredMessage="#{myBundle.CreateJuegoRequiredMessage_imgurl}" size="45" maxlength="45"/>
+
                         <p:outputLabel value="#{myBundle.CreateJuegoLabel_generoList}" for="generoList" />
-                        <p:selectManyCheckbox id="generoList" value="#{juegoController.selected.generoList}"  converter="generoConverter">
+                        <p:selectManyMenu id="generoList" value="#{juegoController.selected.generoList}"  converter="generoConverter">
                             <f:attribute name="collectionType" value="java.util.ArrayList"/>
                             <f:selectItems value="#{generoController.items}"
                                            var="generoListItem"
                                            itemValue="#{generoListItem}"
-                                           itemLabel="#{generoListItem.genero}"
+                                           itemLabel="#{generoListItem.idGenero.toString()}"
                                            />
 
-                        </p:selectManyCheckbox>
+                        </p:selectManyMenu>
 
                         <p:outputLabel value="#{myBundle.CreateJuegoLabel_plataformaList}" for="plataformaList" />
-                        <p:selectManyCheckbox id="plataformaList" value="#{juegoController.selected.plataformaList}"  converter="plataformaConverter">
+                        <p:selectManyMenu id="plataformaList" value="#{juegoController.selected.plataformaList}"  converter="plataformaConverter">
                             <f:attribute name="collectionType" value="java.util.ArrayList"/>
                             <f:selectItems value="#{plataformaController.items}"
                                            var="plataformaListItem"
                                            itemValue="#{plataformaListItem}"
-                                           itemLabel="#{plataformaListItem.plataforma}"
+                                           itemLabel="#{plataformaListItem.idPlataforma.toString()}"
                                            />
 
-                        </p:selectManyCheckbox>
+                        </p:selectManyMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{juegoController.saveNew}" value="#{myBundle.Save}" update="display,:JuegoListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('JuegoCreateDialog'));">
                         <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>

@@ -27,17 +27,30 @@
                         <h:outputText value="#{myBundle.ViewJuegoLabel_precioJuego}"/>
                         <h:outputText value="#{juegoController.selected.precioJuego}" title="#{myBundle.ViewJuegoTitle_precioJuego}"/>
 
+                        <h:outputText value="#{myBundle.ViewJuegoLabel_imgurl}"/>
+                        <h:outputText value="#{juegoController.selected.imgurl}" title="#{myBundle.ViewJuegoTitle_imgurl}"/>
+
                         <h:outputText value="#{myBundle.ViewJuegoLabel_generoList}"/>
-                        <ui:repeat var="gen" value="#{juegoController.selected.generoList}">
-                            <h:outputLabel value="#{gen.genero}"/>
-                            <br/>
-                        </ui:repeat>
+                        <p:selectManyMenu converter="generoConverter">
+                            <f:attribute name="collectionType" value="java.util.ArrayList"/>
+                            <f:selectItems value="#{juegoController.selected.generoList}"
+                                           var="generoListItem"
+                                           itemValue="#{generoListItem}"
+                                           itemLabel="#{generoListItem.idGenero.toString()}"
+                                           />
+
+                        </p:selectManyMenu>
 
                         <h:outputText value="#{myBundle.ViewJuegoLabel_plataformaList}"/>
-                        <ui:repeat var="pla" value="#{juegoController.selected.plataformaList}">
-                            <h:outputLabel value="#{pla.plataforma}"/>
-                            <br/>
-                        </ui:repeat>
+                        <p:selectManyMenu converter="plataformaConverter">
+                            <f:attribute name="collectionType" value="java.util.ArrayList"/>
+                            <f:selectItems value="#{juegoController.selected.plataformaList}"
+                                           var="plataformaListItem"
+                                           itemValue="#{plataformaListItem}"
+                                           itemLabel="#{plataformaListItem.idPlataforma.toString()}"
+                                           />
+
+                        </p:selectManyMenu>
                     </p:panelGrid>
                     <p:commandButton value="#{myBundle.Close}" onclick="PF('JuegoViewDialog').hide()"/>
                 </h:panelGroup>

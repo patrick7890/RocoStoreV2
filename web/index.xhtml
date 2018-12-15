@@ -12,17 +12,17 @@
         </ui:define>
         <ui:define name="body">
             <p:dataGrid var="item" value="#{juegoController.items}" columns="3" layout="grid"
-            rows="12" id="juegos">
+                        rows="12" id="juegos">
 
-            <f:facet name="header">
-                Juegos
-            </f:facet>
+                <f:facet name="header">
+                    Juegos
+                </f:facet>
 
-            <p:panel header="#{item.nombreJuego}" style="text-align:center">
-                <h:panelGrid columns="1" style="width:100%">
-                    <img src="/rocostore/resources/img/#{item.nombreJuego}.jpg" style="width: 120px;height: 150px;"/> 
-                </h:panelGrid>
-            </p:panel>
+                <p:panel header="#{item.nombreJuego}" style="text-align:center">
+                    <h:panelGrid columns="1" style="width:100%">
+                        <img src="/RocoStoreV2/resources/img/#{item.imgurl}" style="width: 120px;height: 150px;"/> 
+                    </h:panelGrid>
+                </p:panel>
 
             </p:dataGrid>
 
