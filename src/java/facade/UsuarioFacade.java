@@ -106,5 +106,16 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
             return null;
         }
     }
+    public Usuario validateAdmin(String user, String pwd) {
+        try {
+            Query q = em.createNamedQuery("Usuario.loginadmin");
+            q.setParameter("nombreUsuario", user);
+            q.setParameter("passUsuario", pwd);
+            return (Usuario) q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
+    
 }

@@ -25,15 +25,15 @@
                         <p:selectBooleanCheckbox id="facturada" value="#{compraController.selected.facturada}" required="true" requiredMessage="#{myBundle.CreateCompraRequiredMessage_facturada}"/>
 
                         <p:outputLabel value="#{myBundle.CreateCompraLabel_codigoList}" for="codigoList" />
-                        <p:selectManyMenu id="codigoList" value="#{compraController.selected.codigoList}"  converter="codigoConverter">
+                        <p:selectManyCheckbox id="codigoList" value="#{compraController.selected.codigoList}"  converter="codigoConverter">
                             <f:attribute name="collectionType" value="java.util.ArrayList"/>
                             <f:selectItems value="#{codigoController.items}"
                                            var="codigoListItem"
                                            itemValue="#{codigoListItem}"
-                                           itemLabel="#{codigoListItem.codigo.toString()}"
+                                           itemLabel="#{codigoListItem.juegoidJuego.nombreJuego}"
                                            />
 
-                        </p:selectManyMenu>
+                        </p:selectManyCheckbox>
 
                         <p:outputLabel value="#{myBundle.CreateCompraLabel_usuarioidUsuario}" for="usuarioidUsuario" />
                         <p:selectOneMenu id="usuarioidUsuario" value="#{compraController.selected.usuarioidUsuario}" required="true" requiredMessage="#{myBundle.CreateCompraRequiredMessage_usuarioidUsuario}" converter="usuarioConverter">

@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -20,6 +21,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -35,9 +38,18 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
     , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
+    , @NamedQuery(name = "Usuario.findByRut", query = "SELECT u FROM Usuario u WHERE u.rut = :rut")
+    , @NamedQuery(name = "Usuario.findByDv", query = "SELECT u FROM Usuario u WHERE u.dv = :dv")
+    , @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre")
+    , @NamedQuery(name = "Usuario.findByApellido", query = "SELECT u FROM Usuario u WHERE u.apellido = :apellido")
+    , @NamedQuery(name = "Usuario.findByDireccion", query = "SELECT u FROM Usuario u WHERE u.direccion = :direccion")
+    , @NamedQuery(name = "Usuario.findByFechaNacimento", query = "SELECT u FROM Usuario u WHERE u.fechaNacimento = :fechaNacimento")
     , @NamedQuery(name = "Usuario.findByNombreUsuario", query = "SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario")
-    ,@NamedQuery(name = "Usuario.login", query = "SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario and u.passUsuario = :passUsuario")
-    , @NamedQuery(name = "Usuario.findByPassUsuario", query = "SELECT u FROM Usuario u WHERE u.passUsuario = :passUsuario")})
+    , @NamedQuery(name = "Usuario.login", query = "SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario and u.passUsuario = :passUsuario and u.tipoUsuarioidTipoUsuario.idTipoUsuario=2")
+    , @NamedQuery(name = "Usuario.loginadmin", query = "SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario and u.passUsuario = :passUsuario and u.tipoUsuarioidTipoUsuario.idTipoUsuario=1")
+    , @NamedQuery(name = "Usuario.findByPassUsuario", query = "SELECT u FROM Usuario u WHERE u.passUsuario = :passUsuario")
+
+})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +58,35 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "idUsuario")
     private Integer idUsuario;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "rut")
+    private int rut;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 1)
+    @Column(name = "dv")
+    private String dv;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "nombre")
+    private String nombre;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "apellido")
+    private String apellido;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "direccion")
+    private String direccion;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "fecha_nacimento")
+    @Temporal(TemporalType.DATE)
+    private Date fechaNacimento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -73,8 +114,14 @@ public class Usuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(Integer idUsuario, String nombreUsuario, String passUsuario) {
+    public Usuario(Integer idUsuario, int rut, String dv, String nombre, String apellido, String direccion, Date fechaNacimento, String nombreUsuario, String passUsuario) {
         this.idUsuario = idUsuario;
+        this.rut = rut;
+        this.dv = dv;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.fechaNacimento = fechaNacimento;
         this.nombreUsuario = nombreUsuario;
         this.passUsuario = passUsuario;
     }
@@ -85,6 +132,54 @@ public class Usuario implements Serializable {
 
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public int getRut() {
+        return rut;
+    }
+
+    public void setRut(int rut) {
+        this.rut = rut;
+    }
+
+    public String getDv() {
+        return dv;
+    }
+
+    public void setDv(String dv) {
+        this.dv = dv;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Date getFechaNacimento() {
+        return fechaNacimento;
+    }
+
+    public void setFechaNacimento(Date fechaNacimento) {
+        this.fechaNacimento = fechaNacimento;
     }
 
     public String getNombreUsuario() {

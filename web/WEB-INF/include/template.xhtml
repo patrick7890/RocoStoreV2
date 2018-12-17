@@ -1,14 +1,21 @@
 <?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <h:outputStylesheet library="css" name="pfcrud.css"/>
+        <h:outputStylesheet library="css" name="material-dashboard-rtl.css"/>
+        <h:outputStylesheet library="css" name="material-dashboard.min.css"/>
         <h:outputScript library="scripts" name="pfcrud.js"/>
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+
     </h:head>
 
     <h:body>
@@ -16,13 +23,16 @@
         <p:growl id="growl" life="3000"/>
 
         <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="100" header="#{myBundle.AppName}">
-                <!-- Menu here. Also a layout and a way to log a user out -->
+            <p:layoutUnit position="north" size="100">
                 <ui:include src="/WEB-INF/include/appmenu.xhtml"/>
             </p:layoutUnit>
 
-            <p:layoutUnit position="south" size="60">
+            <p:layoutUnit class="text-center" position="south" size="60">
                 <ui:insert name="footer"/>
+                    <p:outputLabel value="Contacto: rocostore@contacto.com"/>
+          -
+                    <h:link value="FAQ"/>
+                    
             </p:layoutUnit>
 
             <p:layoutUnit position="center">

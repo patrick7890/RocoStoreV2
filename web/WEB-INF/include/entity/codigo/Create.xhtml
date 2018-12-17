@@ -15,11 +15,6 @@
                 <h:panelGroup id="display" rendered="#{codigoController.selected != null}">
                     <p:panelGrid columns="2" columnClasses="column">
 
-                        <p:outputLabel value="#{myBundle.CreateCodigoLabel_codigo}" for="codigo" />
-                        <p:inputText id="codigo" value="#{codigoController.selected.codigo}" title="#{myBundle.CreateCodigoTitle_codigo}" required="true" requiredMessage="#{myBundle.CreateCodigoRequiredMessage_codigo}" size="45" maxlength="45"/>
-
-                        <p:outputLabel value="#{myBundle.CreateCodigoLabel_activo}" for="activo" />
-                        <p:inputText id="activo" value="#{codigoController.selected.activo}" title="#{myBundle.CreateCodigoTitle_activo}" required="true" requiredMessage="#{myBundle.CreateCodigoRequiredMessage_activo}"/>
 
                         <p:outputLabel value="#{myBundle.CreateCodigoLabel_juegoidJuego}" for="juegoidJuego" />
                         <p:selectOneMenu id="juegoidJuego" value="#{codigoController.selected.juegoidJuego}" required="true" requiredMessage="#{myBundle.CreateCodigoRequiredMessage_juegoidJuego}" converter="juegoConverter">
@@ -27,15 +22,17 @@
                             <f:selectItems value="#{juegoController.items}"
                                            var="juegoidJuegoItem"
                                            itemValue="#{juegoidJuegoItem}"
-                                           itemLabel="#{juegoidJuegoItem.descripcionJuego.toString()}"
+                                           itemLabel="#{juegoidJuegoItem.nombreJuego}"
                                            />
 
                         </p:selectOneMenu>
                     </p:panelGrid>
+                    <h:inputHidden  id="codigo" value="#{codigoController.selected.codigo}"/>
+                    <h:inputHidden  id="activo" value="#{codigoController.selected.activo}"/>
+                    <p:remoteCommand oncomplete=" Keygen(); " autoRun="true"/>
                     <p:commandButton actionListener="#{codigoController.saveNew}" value="#{myBundle.Save}" update="display,:CodigoListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CodigoCreateDialog'));">
                         <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
-
                     <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('CodigoCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
                 </h:panelGroup>
 

@@ -15,6 +15,24 @@
                 <h:panelGroup id="display" rendered="#{usuarioController.selected != null}">
                     <p:panelGrid columns="2" columnClasses="column">
 
+                        <p:outputLabel value="#{myBundle.CreateUsuarioLabel_rut}" for="rut" />
+                        <p:inputText id="rut" value="#{usuarioController.selected.rut}" title="#{myBundle.CreateUsuarioTitle_rut}" required="true" requiredMessage="#{myBundle.CreateUsuarioRequiredMessage_rut}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateUsuarioLabel_dv}" for="dv" />
+                        <p:inputText id="dv" value="#{usuarioController.selected.dv}" title="#{myBundle.CreateUsuarioTitle_dv}" required="true" requiredMessage="#{myBundle.CreateUsuarioRequiredMessage_dv}" size="1" maxlength="1"/>
+
+                        <p:outputLabel value="#{myBundle.CreateUsuarioLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{myBundle.CreateUsuarioTitle_nombre}" required="true" requiredMessage="#{myBundle.CreateUsuarioRequiredMessage_nombre}" size="45" maxlength="45"/>
+
+                        <p:outputLabel value="#{myBundle.CreateUsuarioLabel_apellido}" for="apellido" />
+                        <p:inputText id="apellido" value="#{usuarioController.selected.apellido}" title="#{myBundle.CreateUsuarioTitle_apellido}" required="true" requiredMessage="#{myBundle.CreateUsuarioRequiredMessage_apellido}" size="45" maxlength="45"/>
+
+                        <p:outputLabel value="#{myBundle.CreateUsuarioLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{usuarioController.selected.direccion}" title="#{myBundle.CreateUsuarioTitle_direccion}" required="true" requiredMessage="#{myBundle.CreateUsuarioRequiredMessage_direccion}" size="45" maxlength="45"/>
+
+                        <p:outputLabel value="#{myBundle.CreateUsuarioLabel_fechaNacimento}" for="fechaNacimento" />
+                        <p:calendar id="fechaNacimento" pattern="MM/dd/yyyy" value="#{usuarioController.selected.fechaNacimento}" title="#{myBundle.CreateUsuarioTitle_fechaNacimento}" required="true" requiredMessage="#{myBundle.CreateUsuarioRequiredMessage_fechaNacimento}" showOn="button"/>
+
                         <p:outputLabel value="#{myBundle.CreateUsuarioLabel_nombreUsuario}" for="nombreUsuario" />
                         <p:inputText id="nombreUsuario" value="#{usuarioController.selected.nombreUsuario}" title="#{myBundle.CreateUsuarioTitle_nombreUsuario}" required="true" requiredMessage="#{myBundle.CreateUsuarioRequiredMessage_nombreUsuario}" size="45" maxlength="45"/>
 

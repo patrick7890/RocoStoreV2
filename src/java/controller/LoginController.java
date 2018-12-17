@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Patricio
  */
-@ManagedBean(name="loginController")
+@ManagedBean(name = "loginController")
 @SessionScoped
 public class LoginController {
 
@@ -63,10 +63,25 @@ public class LoginController {
 
     }
 
+    public void loginAdmin() throws IOException {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Usuario aux = usuarioFacade.validateAdmin(user, pwd);
+        if (aux != null) {
+            HttpSession ses = (HttpSession) context.getExternalContext().getSession(false);
+            ses.setAttribute("user", aux);
+            context.getExternalContext().redirect("/RocoStoreV2/faces/admin.xhtml");
+        } else {
+
+            context.addMessage(null, new FacesMessage("Login Error", "Usuario o contraseña incorrecto"));
+            context.getExternalContext().redirect("/RocoStoreV2/faces/admin.xhtml");
+        }
+
+    }
+
     public void logout() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-        context.redirect("/RocoStoreV2/faces/login.xhtml");
+        context.redirect("/RocoStoreV2/faces/index.xhtml");
     }
-    
+
 }

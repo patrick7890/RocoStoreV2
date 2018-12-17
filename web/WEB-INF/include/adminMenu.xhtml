@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition>
+        <script>
+            $(document).ready(function () {
+                $(document).on('click', '.nav-item', function () {
+                    $('.nav-item').removeClass("active");
+                    $(this).addClass("active");
+                });
+            });
+        </script>
+        <li class="nav-item" >
+            <h:link class="nav-link" value="#{myBundle.Home}" outcome="/admin">
+                <i class="material-icons">
+                    home
+                </i>
+            </h:link>
+        </li>
+        <li class="nav-item" >
+            <h:link class="nav-link" value="#{myBundle.CodigoHeading}" outcome="/app/codigo/index">
+                <i class="material-icons">
+                    vpn_key
+                </i></h:link>
+        </li>
+        <li class="nav-item" >
+            <h:link class="nav-link" value="#{myBundle.CompraHeading}" outcome="/app/compra/index">
+                <i class="material-icons">
+                    shopping_cart
+                </i>
+            </h:link>
+        </li>
+        <li class="nav-item" >
+            <h:link class="nav-link" value="#{myBundle.GeneroHeading}" outcome="/app/genero/index">
+                <i class="material-icons">
+                    bookmark
+                </i>
+            </h:link>
+        </li>
+        <li class="nav-item" >
+            <h:link class="nav-link" value="#{myBundle.JuegoHeading}" outcome="/app/juego/index">
+                <i class="material-icons">
+                    games
+                </i>
+            </h:link>
+        </li>
+        <li class="nav-item" >
+            <h:link class="nav-link" value="#{myBundle.PlataformaHeading}" outcome="/app/plataforma/index">
+                <i class="material-icons">
+                    videogame_asset
+                </i>
+            </h:link>
+        </li>
+        <li class="nav-item" >
+            <h:link class="nav-link" value="#{myBundle.TarjetaHeading}" outcome="/app/tarjeta/index">
+                <i class="material-icons">
+                    credit_card
+                </i>
+            </h:link>
+        </li>
+        <li class="nav-item" >
+            <h:link class="nav-link" value="#{myBundle.TicketHeading}" outcome="/app/ticket/index">
+                <i class="material-icons">
+                    question_answer
+                </i>
+            </h:link>
+        </li>
+        <li class="nav-item" >
+            <h:link class="nav-link" value="#{myBundle.TipoticketHeading}" outcome="/app/tipoticket/index">
+                <i class="material-icons">
+                    sort
+                </i>
+            </h:link>
+        </li>
+        <li class="nav-item" >
+            <h:link class="nav-link" value="#{myBundle.TipousuarioHeading}" outcome="/app/tipousuario/index">
+                <i class="material-icons">
+                    sort
+                </i>
+            </h:link>
+        </li>
+        <li class="nav-item" >
+            <h:link class="nav-link" value="#{myBundle.UsuarioHeading}" outcome="/app/usuario/index">
+                <i class="material-icons">
+                    person
+                </i>
+            </h:link>
+        </li>
+
+
+    </ui:composition>
+
+</html>

@@ -54,29 +54,79 @@
                 </p:column>
 
 
-                <p:column sortBy="#{item.nombreUsuario}" filterBy="#{item.nombreUsuario}">
+                <p:column sortBy="#{item.rut}" filterBy="#{item.rut}">
                     <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListUsuarioTitle_nombreUsuario}"/>
+                        <h:outputText value="#{myBundle.ListUsuarioTitle_rut}"/>
                     </f:facet>
-                    <h:outputText value="#{item.nombreUsuario}"/>
+                    <h:outputText value="#{item.rut}"/>
                 </p:column>
 
 
-                <p:column sortBy="#{item.passUsuario}" filterBy="#{item.passUsuario}">
+                <p:column sortBy="#{item.dv}" filterBy="#{item.dv}">
                     <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListUsuarioTitle_passUsuario}"/>
+                        <h:outputText value="#{myBundle.ListUsuarioTitle_dv}"/>
                     </f:facet>
-                    <h:outputText value="#{item.passUsuario}"/>
+                    <h:outputText value="#{item.dv}"/>
                 </p:column>
 
 
-                <p:column sortBy="#{item.tipoUsuarioidTipoUsuario.descripcionTipoUsuario}" filterBy="#{item.tipoUsuarioidTipoUsuario.descripcionTipoUsuario}">
+                <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
                     <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListUsuarioTitle_tipoUsuarioidTipoUsuario}"/>
+                        <h:outputText value="#{myBundle.ListUsuarioTitle_nombre}"/>
                     </f:facet>
-                    <h:outputText value="#{item.tipoUsuarioidTipoUsuario.descripcionTipoUsuario}"/>
+                    <h:outputText value="#{item.nombre}"/>
                 </p:column>
 
+
+                <p:column sortBy="#{item.apellido}" filterBy="#{item.apellido}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListUsuarioTitle_apellido}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.apellido}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.direccion}" filterBy="#{item.direccion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListUsuarioTitle_direccion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.direccion}"/>
+                </p:column>
+
+                <ui:remove>
+                    <p:column sortBy="#{item.fechaNacimento}" filterBy="#{item.fechaNacimento}">
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.ListUsuarioTitle_fechaNacimento}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaNacimento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                </ui:remove>
+                <ui:remove>
+                    <p:column sortBy="#{item.nombreUsuario}" filterBy="#{item.nombreUsuario}">
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.ListUsuarioTitle_nombreUsuario}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombreUsuario}"/>
+                    </p:column>
+                </ui:remove>
+                <ui:remove>
+                    <p:column sortBy="#{item.passUsuario}" filterBy="#{item.passUsuario}">
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.ListUsuarioTitle_passUsuario}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.passUsuario}"/>
+                    </p:column>
+                </ui:remove>
+                <ui:remove>
+                    <p:column sortBy="#{item.tipoUsuarioidTipoUsuario.descripcionTipoUsuario}" filterBy="#{item.tipoUsuarioidTipoUsuario.descripcionTipoUsuario}">
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.ListUsuarioTitle_tipoUsuarioidTipoUsuario}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tipoUsuarioidTipoUsuario.descripcionTipoUsuario}"/>
+                    </p:column>
+                </ui:remove>
 
             </p:dataTable>
 
