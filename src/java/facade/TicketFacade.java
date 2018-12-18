@@ -15,6 +15,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entity.Tipoticket;
 import entity.Usuario;
+import java.util.Collection;
+import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
@@ -58,5 +61,11 @@ public class TicketFacade extends AbstractFacade<Ticket> {
     public Usuario findUsuarioidUsuario(Ticket entity) {
         return this.getMergedEntity(entity).getUsuarioidUsuario();
     }
-    
+
+    public Collection<Ticket> findTickets(int id) {
+        Query q = em.createNamedQuery("TicketUsuario.findByUser");
+        q.setParameter("Usuario", id);
+        return (Collection<Ticket>)q.getResultList();
+    }
+
 }

@@ -7,13 +7,14 @@
                 template="/WEB-INF/include/template.xhtml">
 
     <ui:define name="title">
-        <h:outputText value="#{myBundle.JuegoTitle}"/>
+        <h:outputText value="#{myBundle.TicketTitle}"/>
     </ui:define>
+
     <ui:define name="body">
-        <ui:include src="/WEB-INF/usuario/juego/List.xhtml"/>
-        <ui:include src="/WEB-INF/usuario/juego/View.xhtml"/>
-        <ui:include src="/WEB-INF/usuario/login.xhtml"/>
-        <ui:include src="/WEB-INF/usuario/registar.xhtml"/>
+        <ui:param name="idusu" value="#{user.idUsuario}"/>
+        <ui:include src="/WEB-INF/usuario/ticket/List.xhtml"/>
+        <ui:include src="/WEB-INF/usuario/ticket/View.xhtml"/>
+        <ui:include src="/WEB-INF/usuario/ticket/Create.xhtml"/>
     </ui:define>
 
 </ui:composition>

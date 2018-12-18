@@ -2,6 +2,9 @@ package controller;
 
 import entity.Ticket;
 import facade.TicketFacade;
+import java.util.Collection;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.event.ActionEvent;
@@ -11,6 +14,10 @@ import javax.inject.Inject;
 @ViewScoped
 public class TicketController extends AbstractController<Ticket> {
 
+    @EJB
+    private TicketFacade ticketFacade;
+    private Collection<Ticket> ticketList;
+
     @Inject
     private TipoticketController tipoTicketidTipoTicketController;
     @Inject
@@ -19,6 +26,15 @@ public class TicketController extends AbstractController<Ticket> {
     public TicketController() {
         // Inform the Abstract parent controller of the concrete Ticket Entity
         super(Ticket.class);
+    }
+
+    public Collection<Ticket> getTicketList() {
+        ticketList = ticketFacade.findTickets(5);
+        return ticketList;
+    }
+
+    public void setTicketList(Collection<Ticket> ticketList) {
+        this.ticketList = ticketList;
     }
 
     /**

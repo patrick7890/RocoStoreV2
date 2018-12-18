@@ -9,10 +9,14 @@
 
     <ui:composition>
         <h:form id="menuForm">
+            <p:remoteCommand autoRun="true">
+                <f:setPropertyActionListener value="#{user}"  target="#{usuarioController.selected}"/>
+            </p:remoteCommand>
             <p:menubar>
                 <p:menuitem value="#{myBundle.Home}" outcome="/index" icon="ui-icon-home"/>
                 <c:if test="#{user!=null}">
                     <p:submenu label="#{user.getNombreUsuario()}" style="float:right">
+                        <p:menuitem value="#{myBundle.TicketHeading}" outcome="/tickets" />
                         <p:menuitem value="Cerrar Sesion"  actionListener="#{loginController.logout()}"/>
                     </p:submenu>
                 </c:if>

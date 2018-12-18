@@ -15,7 +15,7 @@
         <c:if test="#{user==null||user.tipoUsuarioidTipoUsuario.idTipoUsuario==2}">
             <ui:include src="/WEB-INF/admin/login.xhtml"/>
         </c:if>
-        <c:if test="#{user!=null||user.tipoUsuarioidTipoUsuario.idTipoUsuario==1}">
+        <c:if test="#{user!=null and user.tipoUsuarioidTipoUsuario.idTipoUsuario==1}">
             <ui:include src="/WEB-INF/admin/indexAdmin.xhtml"/>
         </c:if>
 

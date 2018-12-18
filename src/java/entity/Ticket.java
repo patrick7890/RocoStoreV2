@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Ticket.findByEstado", query = "SELECT t FROM Ticket t WHERE t.estado = :estado")
     , @NamedQuery(name = "Ticket.findByRespuestaTicket", query = "SELECT t FROM Ticket t WHERE t.respuestaTicket = :respuestaTicket")
     , @NamedQuery(name = "Ticket.findByNombreAdmin", query = "SELECT t FROM Ticket t WHERE t.nombreAdmin = :nombreAdmin")
+    , @NamedQuery(name = "Ticket.findByUser", query = "SELECT t FROM Ticket t WHERE t.usuarioidUsuario.idUsuario = :Usuario")
     , @NamedQuery(name = "Ticket.findByImagenTicket", query = "SELECT t FROM Ticket t WHERE t.imagenTicket = :imagenTicket")})
 public class Ticket implements Serializable {
 
