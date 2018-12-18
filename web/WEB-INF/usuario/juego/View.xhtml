@@ -53,10 +53,11 @@
                                 </ui:repeat>
                             </p:column>
                         </p:row>
-
                     </p:panelGrid>
                 </h:panelGroup>
+                <intpu type="hidden" name="idJuego" value="#{juegoController.selected.nombreJuego}"/>
 
+                <p:commandButton actionListener="#{carroController.argregarCarro()}"/>
             </h:form>
 
         </p:dialog>

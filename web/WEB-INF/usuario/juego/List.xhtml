@@ -16,13 +16,13 @@
                 <h:panelGrid columns="1" style="width:100%">
                     <img src="/RocoStoreV2/resources/img/#{item.imgurl}" style="width: 120px;height: 150px;"/>
                     <p:outputLabel value="$#{item.precioJuego}" style="color: black"/>
-                    <p:commandButton id="viewButton"  icon="ui-icon-search" value="#{myBundle.View}" update="JuegoView" oncomplete="PF('JuegoViewD').show()">
+                    <p:commandButton id="viewButton"  icon="ui-icon-search" value="#{myBundle.View}" update="JuegoView"     oncomplete="PF('JuegoViewD').show()">
                         <f:setPropertyActionListener value="#{item}"  target="#{juegoController.selected}"/>
                     </p:commandButton>
                 </h:panelGrid>
             </p:panel>
         </p:dataGrid>
-        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>            
     </h:form>
 
 </ui:composition>

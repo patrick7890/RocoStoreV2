@@ -29,6 +29,7 @@
                         </div>
                     </div>
                 </h:panelGroup>
+                <p:commandLink id="createButton" value="#{myBundle.Create}" actionListener="#{usuarioController.prepareCreate}" update=":UsuarioCreateForm" oncomplete="PF('UsuarioCreateDialog').show()"/>
             </h:form>
 
 

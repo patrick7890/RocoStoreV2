@@ -108,6 +108,7 @@ public class Usuario implements Serializable {
     private List<Tarjeta> tarjetaList;
 
     public Usuario() {
+        tipoUsuarioidTipoUsuario=new Tipousuario(2);
     }
 
     public Usuario(Integer idUsuario) {

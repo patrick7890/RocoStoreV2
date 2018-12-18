@@ -18,6 +18,7 @@ import entity.Genero;
 import entity.Plataforma;
 import entity.Codigo;
 import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
